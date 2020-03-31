@@ -1,27 +1,27 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
-import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { StatusBar } from '@ionic-native/status-bar';
+import { Nav, Platform } from 'ionic-angular';
 
-import { HomePage } from '../pages/home/home';
 
 
-@Component({
+@Component({  //Esse arquivo é o controladr da pagina app.html
   templateUrl: 'app.html'
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage: string = 'HomePage';  // esse cara é quem vai dizer qual será a página inicial a ser aberta
+                                  // quando meu aplicativo for iniciado
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{title: string, component: string}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: HomePage }
+      { title: 'Home', component: 'HomePage' }
     ];
 
   }
