@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { CategoriaService } from '../../services/domain/categoria.service';
+import { CategoriaDTO } from '../../models/categoria.dto';
 
 /**
  * Generated class for the CategoriasPage page.
@@ -16,6 +17,8 @@ import { CategoriaService } from '../../services/domain/categoria.service';
 })
 export class CategoriasPage {
 
+  items: CategoriaDTO[];
+
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -25,18 +28,22 @@ export class CategoriasPage {
 
 //evento de quando a página acabar de ser carregada
   ionViewDidLoad() {
-    //Como findAll é assincrono, temos que nos inscrever para fazer alguma 
-    //para quando obtivermos a resposta do metodo
+    
     this.categoriaService.findAll()
-    //do subscribe estará a função callback , que fará algo com a response quando chegar
+    //Como findAll é assincrono, temos que nos inscrever para fazer alguma coisa
+    //para quando obtivermos a resposta do metodo, assim usaremos o .subscribe
+    //no subscribe estará a função callback , que fará algo com a response quando chegar
     //no nosso caso vamos usar um arrow function que equivale ao lambda do java
-    //essa funcao poderia ser feita fora , tipo f(), e dentro do subscribe só passar ela
-      .subscribe(response => {
-        console.log(response);
+    //essa funcao poderia ser feita fora , tipo f(), e dentro do subscribe só passar ela:
+    // f(response) { console.log(reponse);}
+      .subscribe(
+      response => {
+       this.items=response;
       }, 
       error =>{
         console.log(error);
-      } )
+      } 
+      )
     
   }
 

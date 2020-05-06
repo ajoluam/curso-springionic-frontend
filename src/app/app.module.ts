@@ -1,4 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
+//Importando o HttpClientModule no módulo principal , deixamos disponível a classe para a aplicação inteira
+//Lembrando que tem que ser depois do BrowserModule
 import { HttpClientModule } from '@angular/common/http';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -10,7 +12,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { CategoriaService } from '../services/domain/categoria.service';
 
-@NgModule({//testsa 
+@NgModule({
   declarations: [
     MyApp
   ],
