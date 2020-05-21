@@ -37,7 +37,8 @@ export class HomePage {
     this.authService.authenticate(this.creds)
       .subscribe(
         response => {
-          console.log(response.headers.get('Authorization'));
+          //Armazendo no LocalStorage do HTML5 o meu token
+          this.authService.successLogin(response.headers.get('Authorization'));
           this.navCtrl.setRoot('CategoriasPage');
         },
         error => {}
@@ -52,7 +53,9 @@ export class HomePage {
 
   //Quando deixarmosa pagina HomePage, o menu lateral será habilitado
   ionViewDidLeave() {
+    
     this.menu.swipeEnable(true);
+
   }
 
 }
