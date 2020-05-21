@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, MenuController } from 'ionic-angular';
+import { CredenciaisDTO } from '../../models/credenciais.dto';
 
 @IonicPage() //permite que no app.component.ts possamos utilizar a referenciação da classe
              // HomePage como uma string sem precisar realizarmos um import
@@ -9,6 +10,12 @@ import { IonicPage, NavController, MenuController } from 'ionic-angular';
                             // HTML ele está controlando
 })
 export class HomePage {
+  
+  // Criando um objeto CredenciaisDTO e instanciando valores vazios
+  creds : CredenciaisDTO = {
+    email : "",
+    senha : ""
+  };
 
   //Isso aqui é ma injeção de dependência através do construtor
   constructor(public navCtrl: NavController, public menu: MenuController) {
@@ -22,6 +29,7 @@ export class HomePage {
 
     //Com o setRoot ele não empilha a página então não aparece a setinha para voltar
     //aparece só o menu 
+    console.log(this.creds);
     this.navCtrl.setRoot('CategoriasPage');
   }
 

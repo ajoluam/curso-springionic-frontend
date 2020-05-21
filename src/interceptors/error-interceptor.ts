@@ -1,7 +1,7 @@
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Rx"; //IMPORTANTE - IMPORTE ATUALIZADO
-import { text } from "@angular/core/src/render3/instructions";
+
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor{
