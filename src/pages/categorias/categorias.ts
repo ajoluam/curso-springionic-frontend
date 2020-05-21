@@ -18,6 +18,7 @@ import { CategoriaDTO } from '../../models/categoria.dto';
 export class CategoriasPage {
 
   items: CategoriaDTO[];
+  imagemLocal : string = 'assets/imgs';
 
   constructor(
     public navCtrl: NavController, 
@@ -40,10 +41,7 @@ export class CategoriasPage {
       response => {
        this.items=response;
       }, 
-      error =>{
-        console.log(error);
-      } 
-      )
+      error =>{ } );
     
   }
 
