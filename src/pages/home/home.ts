@@ -39,7 +39,7 @@ export class HomePage {
         response => {
           //Armazendo no LocalStorage do HTML5 o meu token
           this.authService.successLogin(response.headers.get('Authorization'));
-          this.navCtrl.setRoot('CategoriasPage');
+          this.navCtrl.setRoot('CategoriasPage'); //Chamando a página de cateorias depois de validar a autenticação
         },
         error => {}
       )

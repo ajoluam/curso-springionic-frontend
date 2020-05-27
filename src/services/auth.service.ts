@@ -16,13 +16,13 @@ export class AuthService{
     }
 
     // O método POST requer alguns parâmetro extras , inclusive o responseType
-    //colocamos text porque não recebemos nada como resposta, se colacassemoa JSON
+    //colocamos text porque não recebemos nada como resposta, se colacassemos JSON
     //tomariamos um erro na hora de fazer o parse do JSON
     authenticate(creds : CredenciaisDTO){
         return this.http.post(
             `${API_CONFIG.baseUrl}/login`, 
             creds,
-            {
+            {  
                 observe: 'response',
                 responseType: 'text'
             });
@@ -31,8 +31,9 @@ export class AuthService{
 
     successLogin(authorizationValue : string){
         //Para retirar a palavra BEARER que vem no token
-        //Usaremos a biblioteza JWT para extrair o email do token
         let tok = authorizationValue.substring(7);
+       
+        //Usaremos a biblioteza JWT para extrair o email do token
         let user : LocalUser = {
             token: tok,
             email: this.jwtHelper.decodeToken(tok).sub

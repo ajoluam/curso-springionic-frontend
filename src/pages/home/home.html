@@ -8,11 +8,13 @@
     <ion-item>
       <ion-label stacked>Email</ion-label>
       <!--Binding de Atributo HTML [], Binding de eventos ()-->
+      <!--A diretiva ngModel é responsavel pela ligação da propriedade com o escolpo-->
       <ion-input [(ngModel)]="creds.email" name="email" type="text"></ion-input>
+      
 
     </ion-item>
 
-    <ion-item>
+    <ion-item>123a
       <ion-label stacked>Senha</ion-label>
       <ion-input [(ngModel)]="creds.senha" name="senha" type="password"></ion-input>
     </ion-item>
@@ -21,6 +23,7 @@
 
   </form>
   <div padding>
+    <h3>{{creds.email.substring(0,creds.email.indexOf("@"))}}</h3>
     <button ion-button block (click)="login()">Entrar</button>
     <button ion-button block outline>Registrar</button>
   </div>
