@@ -49,13 +49,25 @@ export class HomePage {
   //Quando entrarmos na pagina HomePage, o menu lateral será desabilitado
   ionViewWillEnter() {
     this.menu.swipeEnable(false);
-  }
+  };
 
-  //Quando deixarmosa pagina HomePage, o menu lateral será habilitado
+  //Quando deixarmos a pagina HomePage, o menu lateral será habilitado
   ionViewDidLeave() {
     
     this.menu.swipeEnable(true);
 
-  }
+  };
+
+  ionViewDidEnter(){
+    this.authService.refreshToken()
+      .subscribe(
+        response => {
+          //Armazendo no LocalStorage do HTML5 o meu token
+          this.authService.successLogin(response.headers.get('Authorization'));
+          this.navCtrl.setRoot('CategoriasPage'); //Chamando a página de cateorias depois de validar a autenticação
+        },
+        error => {}
+      )
+  };
 
 }
