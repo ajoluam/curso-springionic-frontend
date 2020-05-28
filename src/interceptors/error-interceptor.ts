@@ -2,13 +2,14 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HTTP_INTERCEPTORS
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Rx"; //IMPORTANTE - IMPORTE ATUALIZADO
 import { StorageService } from "../services/storage.service";
+import { AlertController } from "ionic-angular";
 
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor{
 
 
-        constructor(public storage: StorageService){
+        constructor(public storage: StorageService, public alertCtrl : AlertController){
 
         }
     
@@ -37,10 +38,18 @@ export class ErrorInterceptor implements HttpInterceptor{
 
 
                 switch(errorObj.status){
+
+                    case 401:
+                        this.handle401();
+                    break;
+
                     case 403:
                         this.handle403();
                     break;
 
+                    default:
+                        this.handleDefaultEror(errorObj);
+                   
                 }
 
 
@@ -49,6 +58,36 @@ export class ErrorInterceptor implements HttpInterceptor{
             }) as any;
     }
 
+
+    handleDefaultEror(errorObj) {
+        let alert = this.alertCtrl.create({
+            title: 'Erro ' + errorObj.status + ': ' + errorObj.error,
+            message: errorObj.message,
+            enableBackdropDismiss: false , //para sair do Alert tenho que clicar no botão do alert e não clicar fora
+            buttons:[
+                {
+                    text: 'OK',
+                }
+            ]
+        });
+        alert.present();
+    }
+
+    handle401(){
+        let alert = this.alertCtrl.create({
+            title: 'Erro 401: Falha de autenticação.',
+            message: 'Email ou senha incorretos.',
+            enableBackdropDismiss: false , //para sair do Alert tenho que clicar no botão do alert e não clicar fora
+            buttons:[
+                {
+                    text: 'OK',
+                }
+            ]
+        });
+        alert.present();
+        
+    }
+    
     // Como erro 403 Forbidden significa  Acesso negado/proibido, vou apagar o localUser
     handle403(){
         this.storage.setLocalUser(null);
