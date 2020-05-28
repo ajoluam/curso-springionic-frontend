@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs/RX";
 import { ClienteDTO } from "../../models/cliente.dto";
 import { API_CONFIG } from "../../config/api.config";
-import { STORAGE_KEYS } from "../../config/storage_keys.config";
 import { StorageService } from "../storage.service";
 
 @Injectable()
@@ -16,12 +15,13 @@ export class ClienteService {
 
     findByEmail(email : string) : Observable<ClienteDTO> {
 
-        let token = this.storage.getLocalUser().token;
-        let authHeader = new HttpHeaders({'Authorization': 'Bearer ' + token});
+        //Quando não estava interceptando a requisição para colocar o Token, precisava fazer isso manualmente  
+        //   let token = this.storage.getLocalUser().token;
+        //   let authHeader = new HttpHeaders({'Authorization': 'Bearer ' + token});
 
        return this.http.get<ClienteDTO>(
-           `${API_CONFIG.baseUrl}/clientes/email?value=${email}`,
-           {'headers': authHeader}
+           `${API_CONFIG.baseUrl}/clientes/email?value=${email}`
+           //{'headers': authHeader}
            );
 
     }

@@ -8,7 +8,6 @@ export class ErrorInterceptor implements HttpInterceptor{
     
     
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        console.log("Passou no Interceptor");
         //Ao interceptar a requisição a mesma deverá ser continuada (next.handle(req))
         //Caso aconteça algum erro , progada ele tb (Observable.throw(error)) para o 
         //controlador , o controlador por sua vez joga está mandando imprimir na tela
