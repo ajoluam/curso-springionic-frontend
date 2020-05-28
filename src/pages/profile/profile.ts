@@ -11,28 +11,36 @@ import { ClienteService } from '../../services/domain/cliente.service';
 })
 export class ProfilePage {
 
-   cliente : ClienteDTO;
+  cliente: ClienteDTO;
 
   constructor(
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public navParams: NavParams,
-    public storage: StorageService ,
-    public clienteService: ClienteService 
-    ) {
+    public storage: StorageService,
+    public clienteService: ClienteService
+  ) {
   }
 
   ionViewDidLoad() {
-    
+
     let localUser = this.storage.getLocalUser();
     if (localUser && localUser.email) {
-        this.clienteService.findByEmail(localUser.email)
+      this.clienteService.findByEmail(localUser.email)
         .subscribe(
           response => {
             this.cliente = response;
             this.cliente.imageUrl = 'assets/imgs/foto.jpg'
-           },
-           error => {}
+          },
+          error => {
+            if (error.status == 403) {
+              this.navCtrl.setRoot("HomePage");
+
+            }
+          }
         );
+    }
+    else {
+      this.navCtrl.setRoot("HomePage");
     }
 
   }
